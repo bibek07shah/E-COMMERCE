@@ -1,0 +1,118 @@
+{% extends 'profile_dashboard.html' %}
+{% load static %}
+
+{% block maincontent %}
+<style>
+
+
+    .profile-card {
+        display: flex;
+        max-width: 900px;
+        height: 500px;
+        margin: 75px auto;
+        background: #ffffff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+    }
+
+    .profile-sidebar {
+        background: linear-gradient(to bottom, #dcf3ff, #aad3ff);
+        padding: 40px 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 45%;
+        color: white;
+    }
+
+    .profile-sidebar img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 5px solid #fff;
+        object-fit: cover;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+    .username {
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+    }
+
+    .btn-edit {
+        display: inline-block;
+        margin-top: 20px;
+        background-color: #00aaff;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-edit:hover {
+        background-color: #0088cc;
+        color: white;
+    }
+
+    .profile-main {
+        padding: 40px;
+        width: 65%;
+    }
+
+    .profile-main h2 {
+        margin-top: 0;
+        color: #222;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .profile-main p {
+        margin: 14px 0;
+        color: #555;
+        font-size: 16px;
+    }
+
+    .profile-main strong {
+        width: 110px;
+        display: inline-block;
+        color: #111;
+    }
+
+    .profile-main i {
+        color: #007cf0;
+        margin-left: 8px;
+    }
+</style>
+
+
+<div class="profile-card ">
+    <div class="profile-sidebar">
+        {% if request.user.profile.profile_picture %}
+            <img src="{{ request.user.profile.profile_picture.url }}"  alt="Profile Image">
+        {% else %}
+            <img src="{% static 'images/download (16).png' %}" alt="Default Profile Image">
+        {% endif %}
+        <div class="username text-dark">{{ user.username }}</div>
+        <a href="{% url 'update_profile' %}" class="btn-edit">Edit Profile</a>
+    </div>
+
+    <div class="profile-main">
+        <h2>User Details <i class="fa-solid fa-user p-2 mx-auto"></i></h2>
+        <p><strong><i class="fas fa-user"></i>  Fullname:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+        <p><strong><i class="fas fa-info-circle"></i>  Bio:</strong> {{ request.user.profile.bio }}</p>
+        <p><strong><i class="fas fa-envelope"></i>  Email:</strong> {{ user.email }}</p>
+        <p><strong><i class="fas fa-phone"></i>  Phone:</strong> {{ user.phone }}</p>
+        <p><strong><i class="fas fa-birthday-cake"></i>  DOB:</strong> {{ request.user.profile.dob }}</p>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock maincontent %}

@@ -1,0 +1,86 @@
+{% extends 'profile_dashboard.html' %}
+{% load static %}
+
+{% block maincontent %}
+<style>
+  
+  /* Container card style */
+  .profile-update-card {
+   
+ 
+    padding: 20px;
+   
+    
+    margin-left:35px;
+    margin-right: 35px;
+    width: 75%;
+  
+
+}
+
+  /* Image styling */
+  .profile-pic {
+    border-radius: 100%;
+    border: 5px solid #ffffff;
+    background: #ffffff;
+    
+    object-fit: cover;
+    box-shadow: 0 8px 16px rgb(68, 68, 68);
+  }
+
+  /* Submit button styling */
+  .btn-update {
+    background-color: #236cff;
+    color: white;
+    font-weight: 800;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    margin-left: 75%;
+    
+    
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-update:hover {
+    background-color: #000e8a;
+    color: #fff;
+  }
+
+  /* Responsive spacing */
+  @media (max-width: 767px) {
+    .profile-update-card {
+      padding: 15px;
+    }
+  }
+  .col-md-6{
+    display: flex;
+    justify-content: center;
+     background:rgb(255, 255, 255);
+        border-radius: 20px;
+        padding: 20px;box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.5);
+    
+    
+
+  }
+</style>
+
+<h1 class="text-center text-dark p-3">Edit Profile</h1>
+
+<div class="container profile-update-card mx-auto">
+  <div class="row align-items-center gy-4">
+    <div class="col-6 text-center  ">
+      <img src="{{ request.user.profile.profile_picture.url }}" height="250px" width="250px" alt="Profile Picture" class="profile-pic" />
+    </div>
+    <div class="col-md-6 u">
+      <form method="post" action="" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit" class="btn btn-update mt-3  w-auto ">Save</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock maincontent %}
